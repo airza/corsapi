@@ -62,8 +62,10 @@ def starCredentialsApi():
 @app.route("/awful_api",methods=['get'])
 @login_required
 def awfulApi():
+    origin = request.headers['origin'] if 'origin' in request.headers else 'sameorigin'
+
     headers= {
-      'Access-Control-Allow-Origin':origin,
+      'Access-Control-Allow-Origin': origin,
       'Access-Control-Allow-Credentials': True
     }
     data=json.dumps(return_record(session['username']))
