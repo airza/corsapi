@@ -44,7 +44,7 @@ def starApi():
       'Access-Control-Allow-Origin':'*',
       "Content-Type":"application/javascript; charset=utf-8"
     }
-    if 'username' in session:
+    if 'username' not in session:
       data = {'error':'no auth'}
     else:
       data=json.dumps(return_record(session['username']))
@@ -58,7 +58,7 @@ def starCredentialsApi():
       'Access-Control-Allow-Credentials': True,
       "Content-Type":"application/javascript; charset=utf-8"
     }
-    if 'username' in session:
+    if 'username' not in session:
       data = {'error':'no auth'}
     else:
       data=json.dumps(return_record(session['username']))
@@ -75,7 +75,7 @@ def awfulApi():
       'Access-Control-Allow-Credentials': True,
       "Content-Type":"application/javascript; charset=utf-8"
     }
-    if 'username' in session:
+    if 'username' not in session:
       data = {'error':'no auth'}
     else:
       data=json.dumps(return_record(session['username']))
@@ -91,11 +91,11 @@ def jsonPApi():
 
 @app.route("/logout",methods=['get'])
 def logout():
-  if 'username' in session:
+  if 'username' not in session:
     del session['username']
   return 'ok'
 
 app.secret_key="248135829013891840918-4182-481-4809358029385082350923849184-32842835902035"
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port,debug=True)
