@@ -93,7 +93,7 @@ def jsonPApi():
 
 @app.route("/logout",methods=['get'])
 def logout():
-  if 'username' not in session:
+  if 'username' in session:
     del session['username']
   return 'ok'
 

@@ -1,1 +1,35 @@
-hhheh
+<head>
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+$(function(){
+  $.ajax({
+    url:"/basic_api",
+    success:writeData,
+  });
+});
+function writeData(data){
+  var name=data.username;
+  var pizzaID = data.pizzaClubId;
+  var favoritePizza = data.favoritePizza;
+  $('#data').append(`\
+  Name: ${name}<br>\
+  Pizza of The Month ID:${pizzaID}<br>\
+  Favorite Pizza: ${favoritePizza}<br>`)
+}
+
+</script>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.css') }}">
+</head>
+<body>
+<div class="container">
+<h1>Welcome to Pizza Tracker</h1>
+<div id="data">
+</div>
+<h2>API Calls</h2>
+<a href="/star_api">Access-Control-Allow-Origin: *</a><br>
+<a href="/star_credentials_api">Access-Control-Allow-Origin: *,Access-Control-Allow-Credentials:True</a><br>
+<a href="/basic_api">Normal, Non-CORS API Call</a><br>
+<a href="/awful_api">Awful CORS Schema that Nobody Should use, ever</a><br>
+<a href="/jsonp_api?callback=writedata">jsonp api</a><br>
+</div>
+</body>
