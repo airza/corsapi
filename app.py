@@ -42,7 +42,8 @@ def basicApi():
 @login_required
 def starApi():
     headers= {
-      'Access-Control-Allow-Origin':'*'
+      'Access-Control-Allow-Origin':'*',
+      "Content-Type":"application/javascript; charset=utf-8"
     }
     data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
@@ -53,7 +54,8 @@ def starApi():
 def starCredentialsApi():
     headers= {
       'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Credentials': True
+      'Access-Control-Allow-Credentials': True,
+      "Content-Type":"application/javascript; charset=utf-8"
     }
     data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
@@ -68,6 +70,7 @@ def awfulApi():
     headers= {
       'Access-Control-Allow-Origin': origin,
       'Access-Control-Allow-Credentials': True
+      "Content-Type":"application/javascript; charset=utf-8"
     }
     data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
