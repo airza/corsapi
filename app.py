@@ -44,7 +44,8 @@ def basicApi():
 def starApi():
     headers= {
       'Access-Control-Allow-Origin':'*',
-      "Content-Type":"application/json; charset=utf-8"
+      "Content-Type":"application/json; charset=utf-8",
+      "Set-Cookie": "this-is-fine=sdfafas;"
     }
     if 'username' not in session:
       data = {'error':'no auth'}
