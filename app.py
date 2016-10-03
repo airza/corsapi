@@ -53,6 +53,19 @@ def starApi():
     response = Response(response=data,headers=headers)
     return response
 
+@app.route("/origin_api",methods=['get'])
+def originApi():
+    origin = request.headers['origin'] if 'origin' in request.headers else 'sameorigin'
+    headers= {
+      'Access-Control-Allow-Origin': origin,
+      "Content-Type":"application/json; charset=utf-8"
+    }
+    if 'username' not in session:
+      data = {'error':'no auth'}
+    else:
+      data=json.dumps(return_record(session['username']))
+    response = Response(response=data,headers=headers)
+    return response
 @app.route("/star_credentials_api",methods=['get'])
 def starCredentialsApi():
     headers= {
@@ -93,7 +106,7 @@ def jsonPApi():
 
 @app.route("/logout",methods=['get'])
 def logout():
-  if 'username' in session:
+  if 'username' not in session:
     del session['username']
   return 'ok'
 
