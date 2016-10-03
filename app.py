@@ -39,31 +39,34 @@ def basicApi():
     return jsonify(user_data)
 
 @app.route("/star_api",methods=['get'])
-@login_required
 def starApi():
     headers= {
       'Access-Control-Allow-Origin':'*',
       "Content-Type":"application/javascript; charset=utf-8"
     }
-    data=json.dumps(return_record(session['username']))
+    if 'username' in session:
+      data = {'error':'no auth'}
+    else:
+      data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
     return response
 
 @app.route("/star_credentials_api",methods=['get'])
-@login_required
 def starCredentialsApi():
     headers= {
       'Access-Control-Allow-Origin':'*',
       'Access-Control-Allow-Credentials': True,
       "Content-Type":"application/javascript; charset=utf-8"
     }
-    data=json.dumps(return_record(session['username']))
+    if 'username' in session:
+      data = {'error':'no auth'}
+    else:
+      data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
     return response
 
 
 @app.route("/awful_api",methods=['get'])
-@login_required
 def awfulApi():
     origin = request.headers['origin'] if 'origin' in request.headers else 'sameorigin'
 
@@ -72,7 +75,10 @@ def awfulApi():
       'Access-Control-Allow-Credentials': True,
       "Content-Type":"application/javascript; charset=utf-8"
     }
-    data=json.dumps(return_record(session['username']))
+    if 'username' in session:
+      data = {'error':'no auth'}
+    else:
+      data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
     return response
 
