@@ -69,7 +69,7 @@ def awfulApi():
 
     headers= {
       'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Credentials': True
+      'Access-Control-Allow-Credentials': True,
       "Content-Type":"application/javascript; charset=utf-8"
     }
     data=json.dumps(return_record(session['username']))
