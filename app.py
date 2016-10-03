@@ -33,9 +33,11 @@ def index():
     return render_template("index.html")
 
 @app.route("/basic_api",methods=['get'])
-@login_required
 def basicApi():
-    user_data = return_record(session['username'])
+    if 'username' not in session:
+      user_data = {'error':'no auth'}
+    else:
+      user_data = return_record(session['username'])
     return jsonify(user_data)
 
 @app.route("/star_api",methods=['get'])
