@@ -57,7 +57,7 @@ def starApi():
 def starCredentialsApi():
     headers= {
       'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Credentials': True,
+      'Access-Control-Allow-Credentials': 'true',
       "Content-Type":"application/javascript; charset=utf-8"
     }
     if 'username' not in session:
@@ -74,7 +74,7 @@ def awfulApi():
 
     headers= {
       'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Credentials': True,
+      'Access-Control-Allow-Credentials': 'true',
       "Content-Type":"application/javascript; charset=utf-8"
     }
     if 'username' not in session:
