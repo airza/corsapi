@@ -50,13 +50,14 @@ def starApi():
     return response
 
 @app.route("/star_credentials_api",methods=['get'])
-@login_required
 def starCredentialsApi():
     headers= {
       'Access-Control-Allow-Origin':'*',
       'Access-Control-Allow-Credentials': True,
       "Content-Type":"application/javascript; charset=utf-8"
     }
+    if 'username' not in session:
+      print 'no'
     data=json.dumps(return_record(session['username']))
     response = Response(response=data,headers=headers)
     return response
