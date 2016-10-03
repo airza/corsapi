@@ -1,4 +1,4 @@
-from flask import Flask, session,url_for,redirect,request,render_template,Response
+from flask import Flask, session,url_for,redirect,request,render_template,Response,jsonify
 from functools import wraps
 from utils import *
 import json 
@@ -89,4 +89,4 @@ def logout():
 app.secret_key="248135829013891840918-4182-481-4809358029385082350923849184-32842835902035"
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port,debug=True)
